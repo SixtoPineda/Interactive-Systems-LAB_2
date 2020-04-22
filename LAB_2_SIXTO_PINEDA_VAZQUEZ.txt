@@ -1,0 +1,29 @@
+En este caso, a partir de lo que ya implementamos en clase: crear las "balas" que saldrían desde la cabina de tren.
+
+A partir de aquí, procedí a continuar implementando el Proyecto desde https://www.raywenderlich.com/4180726-introduction-to-unity-scripting-part-1
+Por consecuente procedí a usar los Tags.
+- Creé un Tag para el Hay. Y le asigné dicho TAG a la bala. Esto nos sirve para diferenciar la balas de un HAY y otro GameObject
+- Luego cree otro objeto que se posisicionará detrás, hacia donde van las balas, para que cuando salgan del plano de juego, desaparezca y eliminarlos, de tal forma que no se esten creando objetos cada vez que el usuario dispara.
+- Entonces cuando una de las balas colisione contra dicho objeto, la bala desaparece y esl objeto (bala) es eliminado
+- He aquí donde creo la función OnTriggerEnter (en DestroyOnTrigger.cs) para comprobar dicha colision. 
+- A partir de TAG que ya estaba creado "DestroyHay", se lo asignamos al script previamente creado.
+- A partir de aquí, las balas ya desaparecen cuando salen del plano del juego. 
+
+Luego procedí a crear las obejas y hacer que éstas se generen de manera aleatoria. 
+- Creo un objeto (Rigid y Box_collider) y le doy como hijo la "sheep" de los modelos, para así tener ya las obejas.
+- Para poder usar a la obeja creamos un script "sheep" donde estableceré su velociadad de movimiento. 
+- También estableceré que cuando colisione con otro objeto, en este caso seran las balas, la obeja sea eliminadad y desaparezca.
+- Fuera del script estableceremos como 
+	- gotHayDestroyDelay: tiempo que tarda la obeja en desaparecer despues de colisionar con una bala
+	- runSpeed: velocidad de la obeja
+	- hitByHay: valor booleano para saber si la obeja colisionó o no
+- una vez hecho esto todo funciona bien, pero si las obejas no son topadas, pasan los railes y siguien su curso, entonces:
+Lo que haremos ahora es colocal un objeto igual que para hacer desparaecer las balas pero en el otro lado,
+para hacer desaperecer las obejas que pasan detras del HAY.
+Por lo tanto creo una función DROP que desactiva "kinematic", ya no flotará, y le afectará la gravedad, descativar el Trigger, y se vuelve un objeto
+rigido y luego se elimina el objeto en si. 
+
+Por ultimo, hacer que se generen más obejas desde distintos puntos.
+Creo un objeto vació con tres objetos, cada uno representando cada uno de los puntos de regeneracion.
+Siguiendo los pasos, generó una funcion de Respawn de las obejas. Donde se generaran en una de las tres posiciones posibles de manera aleatoria.
+De cada una de las objeas que aparecen, vamos a ir gurdandolas en una lista de donde posteriormente las iremos eliminando si colisionan con una bala o caen detras del Hay.
